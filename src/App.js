@@ -2,12 +2,16 @@ import react, { useState, useRef, useEffect } from "react";
 import "./App.scss";
 import TodoList from "./TodoList";
 import { v4 as uuidv4 } from "uuid";
+import Modal from "./Modal";
 
 const LOCAL_STORAGE_KEY = "todoApp.todos";
 
 function App() {
   const [todos, setTodos] = useState([]);
+  const [lists, setLists] = useState([]);
+  const [isMakingList, setIsMakingList] = useState(false);
   const todoNameRef = useRef();
+  const listNameRef = useRef();
 
   //reading & loading the stored items
   useEffect(() => {
@@ -21,11 +25,14 @@ function App() {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos));
   }, [todos]);
 
-  function handleAddTodo(e) {
+  function handleAddTodo() {
     const name = todoNameRef.current.value;
     if (name === "") return;
     setTodos((prevTodos) => {
-      return [...prevTodos, { id: uuidv4(), name: name, complete: false }];
+      return [
+        ...prevTodos,
+        { id: uuidv4(), name: name, complete: false, list: "" },
+      ];
     });
     todoNameRef.current.value = null;
   }
@@ -37,18 +44,44 @@ function App() {
     setTodos(newTodos);
   }
 
-  function handleClearTodos(){
-    const newTodos = todos.filter(todo => !todo.complete)
-    setTodos(newTodos)
+  function handleClearTodos() {
+    const newTodos = todos.filter((todo) => !todo.complete);
+    setTodos(newTodos);
+  }
+
+  function makeList() {
+    const listName = listNameRef.current.value
+    if (listName === null || lists.some(e => e === listName)) return
+    setLists(prevLists => [...prevLists, listName])
+    listNameRef.current.value = null;
   }
 
   return (
     <div className="main">
-      <TodoList todoList={todos} toggleTodo={toggleTodo} />
-      <input ref={todoNameRef} type="text" />
-      <button onClick={handleAddTodo}>Add Todo</button>
-      <button onClick={handleClearTodos} >Clear Completed Todos</button>
-      <div>{todos.filter(todo => !todo.complete).length} left to do</div>
+      <div className="sidebar">
+        This is the side bar
+        <div>
+          {lists.map((e) => (
+            <p key={uuidv4()}>{e}</p>
+          ))}
+        </div>
+        <button onClick={() => setIsMakingList(true)}> + New List</button>
+      </div>
+      <div className="todo-tm">
+        <TodoList todoList={todos} toggleTodo={toggleTodo} />
+        <input ref={todoNameRef} type="text" onKeyDown={e => e.key === "Enter" && handleAddTodo()}/>
+        <button onClick={handleAddTodo}>Add Todo</button>
+        <button onClick={handleClearTodos}>Clear Completed Todos</button>
+        <div>{todos.filter((todo) => !todo.complete).length} left to do</div>
+      </div>
+      {isMakingList && (
+        <Modal>
+          <p>New List</p>
+          <input type="text" name="new-list-input" placeholder="List Name" ref={listNameRef} onKeyDown={e => e.key === "Enter" && makeList()}/>
+          <button onClick={makeList}>Make List</button>
+        </Modal>
+      
+      )}
     </div>
   );
 }
