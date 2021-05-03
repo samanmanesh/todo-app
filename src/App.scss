@@ -31,3 +31,40 @@
   margin-top: -7.5rem;
   margin-left: -5rem;
 }
+
+.edit-nav{
+  background: gray;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+}
+
+.edit-todo{
+  background: green;
+  margin: .3rem;
+  padding: 3rem;
+}
+
+.myday{
+  background:sandybrown;
+  padding: 2rem;
+  margin: .3rem;
+}
+
+.reminder{
+  background: sienna;
+  
+  margin: .3rem;  
+  & div{
+      margin-bottom: 2rem;
+      background: slateblue;
+  }
+  
+}
+
+.notepad{
+  background: silver;
+  padding: 4rem;
+  margin: .3rem;
+}

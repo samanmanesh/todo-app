@@ -1,10 +1,10 @@
 import React from "react";
+import EditNav from "./EditNav";
 
-export default function Todo({ todoData, toggleTodo }) {
+export default function Todo({ todoData, toggleTodo, openEditBar}) {
   function handleTodoClick() {
     toggleTodo(todoData.id);
   }
-
   return (
     <div>
       <input
@@ -12,7 +12,8 @@ export default function Todo({ todoData, toggleTodo }) {
         checked={todoData.complete}
         onChange={handleTodoClick}
       />
-      <span onClick={() => console.log("hit me & open a side bar")}>{todoData.name}</span>
+      <span onClick={openEditBar}>{todoData.name}, <EditNav data={todoData}/>
+      </span>
     </div>
   );
 }
