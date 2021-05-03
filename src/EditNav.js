@@ -1,12 +1,12 @@
 import React from "react";
 
-export default function EditNav({data}) {
+export default function EditNav({ todoData }) {
+  if (todoData === undefined) return null;
+
   return (
     <div className="edit-nav">
       <div className="edit-todo">
-        {data.name}    
-        <br/>   
-        show the todo
+        {todoData.name}
       </div>
       <div className="myday">Add to My Day</div>
       <div className="reminder">
@@ -16,6 +16,5 @@ export default function EditNav({data}) {
       </div>
       <div className="notepad"> notepad</div>
     </div>
-    
   );
 }

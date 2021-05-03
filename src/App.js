@@ -11,7 +11,7 @@ function App() {
   const [todos, setTodos] = useState([]);
   const [lists, setLists] = useState([]);
   const [isMakingList, setIsMakingList] = useState(false);
-  const [isEditingBar, setIsEditingBar] = useState(false);
+  const [selectedTodo, setSelectedTodo] = useState(null);
   const todoNameRef = useRef();
   const listNameRef = useRef();
 
@@ -57,10 +57,17 @@ function App() {
     setLists((prevLists) => [...prevLists, listName]);
     listNameRef.current.value = null;
   }
-  function openEditBar() {
-    console.log("nav bar is working");
-    setIsEditingBar(true);
+  function selectTodo(todoID) {
+    if (todoID === selectedTodo) setSelectedTodo(null);
+    else setSelectedTodo(todoID);
   }
+
+  useEffect(() => {
+    if (!todos.some((e) => e.id === selectedTodo)) {
+      console.log("selected is gone!");
+      setSelectedTodo(null);
+    }
+  }, [todos]);
 
   return (
     <div className="main">
@@ -77,7 +84,7 @@ function App() {
         <TodoList
           todoList={todos}
           toggleTodo={toggleTodo}
-          openEditBar={openEditBar}
+          openEditBar={selectTodo}
         />
         <input
           ref={todoNameRef}
@@ -85,7 +92,7 @@ function App() {
           onKeyDown={(e) => e.key === "Enter" && handleAddTodo()}
         />
         <button onClick={handleAddTodo}>Add Todo</button>
-        <button onClick={handleClearTodos, () => setIsEditingBar(false)}>Clear Completed Todos</button>
+        <button onClick={handleClearTodos}>Clear Completed Todos</button>
         <div>{todos.filter((todo) => !todo.complete).length} left to do</div>
       </div>
       {isMakingList && (
@@ -102,8 +109,9 @@ function App() {
           <button onClick={() => setIsMakingList(false)}>Cancel</button>
         </Modal>
       )}
-
-      {isEditingBar && < EditNav />}
+      {selectedTodo && (
+        <EditNav todoData={todos.find((e) => e.id === selectedTodo)} />
+      )}
     </div>
   );
 }

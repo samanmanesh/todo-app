@@ -32,39 +32,42 @@
   margin-left: -5rem;
 }
 
-.edit-nav{
+.edit-nav {
   background: gray;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-
+  width: 20vw;
 }
 
-.edit-todo{
+.edit-todo {
   background: green;
-  margin: .3rem;
-  padding: 3rem;
+  width: auto;
+  height: 15vh;
+  margin: 3;
+  padding: 0rem;
 }
 
-.myday{
-  background:sandybrown;
-  padding: 2rem;
-  margin: .3rem;
+.myday {
+  background: sandybrown;
+  width: auto;
+  height: 4vh;
 }
 
-.reminder{
+.reminder {
   background: sienna;
-  
-  margin: .3rem;  
-  & div{
-      margin-bottom: 2rem;
-      background: slateblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: auto;
+  height: 13vh;
+  & div {
+    background: slateblue;
   }
-  
 }
 
-.notepad{
+.notepad {
   background: silver;
-  padding: 4rem;
-  margin: .3rem;
+  width: auto;
+  height: 15vh;
 }
