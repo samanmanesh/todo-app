@@ -110,7 +110,7 @@ function App() {
         </Modal>
       )}
       {selectedTodo && (
-        <EditNav todoData={todos.find((e) => e.id === selectedTodo)} />
+        <EditNav todoData={todos.find((e) => e.id === selectedTodo)} toggleTodo={toggleTodo}/>
       )}
     </div>
   );
