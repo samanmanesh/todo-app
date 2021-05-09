@@ -42,14 +42,38 @@ textarea {
 .sidebar {
   background-color: $darkerBackground;
   border-right: 1px solid rgba(255, 255, 255, 0.371);
+  max-width: 30%;
+  .sidebar-list {
+    @extend .bordered;
+    background: rgba(5, 50, 92, 0.316);
+    padding: 0.5rem;
+    max-width: 98%;
+    word-wrap: break-word;
+    word-break: break-all;
+  }
 }
 
-.todo-tm {
+.todo {
   flex-grow: 1;
 }
 
+.todo-elements {
+  @extend .bordered;
+  display: flex;
+  background: rgba(5, 50, 92, 0.316);
+  padding: 0.5rem;
+  margin-bottom: $gap;
+  word-wrap: break-word;
+  word-break: break-all;
+  align-items: center;
+  max-width: 50vw;
+  // & > span {
+  //   max-width: 50vw;
+  // }
+}
+
 .modal {
-  width: 10rem;
+  width: 12rem;
   height: 15rem;
   position: fixed;
   padding: 1rem;
@@ -59,14 +83,29 @@ textarea {
   left: 50%;
   margin-top: -7.5rem;
   margin-left: -5rem;
+  // & input{
+  //   max-width: 20vw;
+  //   width: auto
+  // }
 }
 
 .edit-nav {
+  @extend .bordered;
   background: $darkerBackground;
   display: flex;
   flex-direction: column;
   min-width: 25vw;
   padding: 1rem;
+}
+.edit-todo {
+  display: flex;
+  flex-direction: row;
+  word-wrap: break-word;
+  word-break: break-all;
+  & .edit-name{
+    all: unset;
+    
+  }
 }
 
 .edit-nav > * {
@@ -101,3 +140,23 @@ textarea {
     margin-bottom: 0.5rem;
   }
 }
+
+// $checkboxSize: 20px;
+// input[type="checkbox"] {
+//   all: unset;
+//   width: $checkboxSize;
+//   height: $checkboxSize;
+//   background: $darkerBackground;
+//   border-radius: 50%;
+//   border: 1px solid rgba(255, 255, 255, 0.481);
+//   position: relative;
+//   &:checked {
+//     ::after {
+//       content: "";
+//       width: 90%;
+//       height: 90%;
+//       background-color: blue;
+//       top: 0;
+//     }
+//   }
+// }

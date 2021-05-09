@@ -1,12 +1,12 @@
 import React from "react";
-import EditNav from "./EditNav";
 
 export default function Todo({ todoData, toggleTodo, openEditBar }) {
+  
   function handleTodoClick() {
     toggleTodo(todoData.id);
   }
   return (
-    <div>
+    <div className='todo-elements'>
       <input
         type="checkbox"
         checked={todoData.complete}
@@ -17,6 +17,7 @@ export default function Todo({ todoData, toggleTodo, openEditBar }) {
       >
         {todoData.name}
       </span>
+
     </div>
   );
 }

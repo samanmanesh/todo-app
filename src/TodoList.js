@@ -3,10 +3,13 @@ import EditNav from "./EditNav";
 import Todo from "./Todo";
 
 
-export default function TodoList({ todoList, toggleTodo ,openEditBar }) {
+export default function TodoList({ todoList, toggleTodo ,openEditBar, selectedList }) {
+
+  const filteredTodos = todoList.filter(e => e.list === selectedList)
+
     return (
-    todoList.map( todo => {
-        return <Todo  key={todo.id} todoData={todo} toggleTodo={toggleTodo} openEditBar={openEditBar} /> 
+      filteredTodos.map( todo => {
+        return <Todo  key={todo.id} todoData={todo} toggleTodo={toggleTodo} openEditBar={openEditBar}/> 
     })
     
   );

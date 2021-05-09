@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import Reminder from "./Reminder";
 
-export default function EditNav({ todoData, toggleTodo }) {
+export default function EditNav({ todoData, updateTodo }) {
   const [isClickedReminder, setIsClickedReminder] = useState(false);
 
   if (todoData === undefined) return null;
-  function handleTodoClick() {
-    toggleTodo(todoData.id);
+
+  function toggleTodo() {
+    const newTodo = { ...todoData, complete: !todoData.complete };
+    updateTodo(newTodo);
   }
 
   function handleReminderClick() {
@@ -14,15 +16,30 @@ export default function EditNav({ todoData, toggleTodo }) {
       ? setIsClickedReminder(true)
       : setIsClickedReminder(false);
   }
+
+  const updateNote = (newText) => {
+    const newTodo = { ...todoData, notes: newText };
+    updateTodo(newTodo);
+  };
+
+  const handleNameChange = e => {
+    const newTodo = { ...todoData, name: e.target.value };
+    updateTodo(newTodo);
+  };
+
   return (
     <div className="edit-nav">
       <div className="edit-todo">
         <input
           type="checkbox"
           checked={todoData.complete}
-          onChange={handleTodoClick}
+          onChange={toggleTodo}
         />
-        {todoData.name}
+        <input
+          value={todoData.name}
+          className="edit-name"
+          onChange={handleNameChange}
+        ></input>
       </div>
       <div className="myday">Add to My Day</div>
       <div className="reminder">
@@ -41,7 +58,13 @@ export default function EditNav({ todoData, toggleTodo }) {
         <button>Add due date</button>
         <button>Repeat</button>
       </div>
-      <textarea name="notepad" cols="15" rows="10"></textarea>
+      <textarea
+        name="notepad"
+        cols="15"
+        rows="10"
+        value={todoData.notes}
+        onChange={(e) => updateNote(e.target.value)}
+      />
     </div>
   );
 }
