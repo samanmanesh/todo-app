@@ -4,6 +4,7 @@ import TodoList from "./TodoList";
 import { v4 as uuidv4 } from "uuid";
 import Modal from "./Modal";
 import EditNav from "./EditNav";
+import FeatherIcon from "feather-icons-react";
 
 const TODOS_KEY = "todoApp.todos";
 const LISTS_KEY = "todoApp.lists";
@@ -123,30 +124,38 @@ function App() {
           {lists.map((list) => (
             <p className="sidebar-list" key={uuidv4()}>
               <span onClick={() => setSelectedList(list)}>{list}</span>
-              <button onClick={() => removeList(list)}> delete</button>
+              <button onClick={() => removeList(list)}>
+                <FeatherIcon className="feather-Icon" icon="close" size="11" />
+              </button>
             </p>
           ))}
         </div>
         <button onClick={() => setIsMakingList(true)}> + New List </button>
       </div>
       <div className="todo">
-       
-        <p> {selectedList} </p>
+        <p className="selected-list"> {selectedList} </p>
+        <button className="add-todo" onClick={handleAddTodo}>+</button>
+        <input
+          className="add-task-input"
+          ref={todoNameRef}
+          type="text"
+          placeholder="Add a task"
+          onKeyDown={(e) => e.key === "Enter" && handleAddTodo()}
+          autoFocus
+        />
+        <br/>
+        <button className="clear-todos" onClick={handleClearTodos}>Clear Completed Todos</button>
+        <div className="left-todo">
+          {todos.filter((todo) => !todo.complete).length} left to do
+        </div>
+        <hr/>
+        {/* <p> {selectedList} </p> */}
         <TodoList
           todoList={todos}
           toggleTodo={toggleTodo}
           openEditBar={selectTodo}
           selectedList={selectedList}
         />
-        <input
-          ref={todoNameRef}
-          type="text"
-          onKeyDown={(e) => e.key === "Enter" && handleAddTodo()}
-          autoFocus
-        />
-        <button onClick={handleAddTodo}>Add Todo</button>
-        <button onClick={handleClearTodos}>Clear Completed Todos</button>
-        <div>{todos.filter((todo) => !todo.complete).length} left to do</div>
       </div>
 
       {isMakingList && (

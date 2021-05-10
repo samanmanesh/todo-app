@@ -48,9 +48,10 @@ export default function EditNav({ todoData, updateTodo }) {
           {isClickedReminder && (
             <Reminder>
               <p>Reminder</p>
+              <hr/>
               <button>Later today 10:00 PM</button>
               <button>Tomorrow Tue, 9 Am</button>
-              <button>Next week Mon,9 Am</button>
+              <button>Next week Mon, 9 Am</button>
               <button>Pick a data &amp; time</button>
             </Reminder>
           )}
