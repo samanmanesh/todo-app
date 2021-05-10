@@ -27,6 +27,12 @@ export default function EditNav({ todoData, updateTodo }) {
     updateTodo(newTodo);
   };
 
+  const handleAddToMyDay = () => {
+    const myDay = {...todoData, myday: !todoData.myday}
+    console.log({myDay})
+    updateTodo(myDay);
+  }
+
   return (
     <div className="edit-nav">
       <div className="edit-todo">
@@ -41,7 +47,7 @@ export default function EditNav({ todoData, updateTodo }) {
           onChange={handleNameChange}
         ></input>
       </div>
-      <div className="myday">Add to My Day</div>
+      <button className="my-day-editbar" onClick={handleAddToMyDay}>Add{todoData.myday && "ed"} to My Day</button>
       <div className="reminder">
         <button onClick={handleReminderClick} className="popup-button">
           Remind me

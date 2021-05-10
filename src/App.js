@@ -4,7 +4,8 @@ import TodoList from "./TodoList";
 import { v4 as uuidv4 } from "uuid";
 import Modal from "./Modal";
 import EditNav from "./EditNav";
-import FeatherIcon from "feather-icons-react";
+import { ReactComponent as Close } from "./feather/x.svg";
+import { ReactComponent as Add } from "./feather/plus.svg";
 
 const TODOS_KEY = "todoApp.todos";
 const LISTS_KEY = "todoApp.lists";
@@ -13,6 +14,7 @@ function App() {
   const [todos, setTodos] = useState([]);
   const [lists, setLists] = useState([]);
   const [selectedList, setSelectedList] = useState("");
+  const [myDay, setMyDay] = useState(false);
   const [isMakingList, setIsMakingList] = useState(false);
   const [selectedTodo, setSelectedTodo] = useState(null);
   const todoNameRef = useRef();
@@ -49,6 +51,7 @@ function App() {
           complete: false,
           list: selectedList,
           notes: "",
+          myday: false,
         },
       ];
     });
@@ -78,14 +81,16 @@ function App() {
     setLists((prevLists) => [...prevLists, listName]);
     listNameRef.current.value = null;
     setIsMakingList(false);
+    setSelectedList(listName)
   }
 
   const removeList = (removedList) => {
     const newTodos = todos.filter((todo) => todo.list !== removedList);
     setTodos(newTodos);
-    let listName = lists.filter((list) => list !== removedList);
+    let updatedLists = lists.filter((list) => list !== removedList);
     setSelectedList("");
-    setLists(listName);
+    // setMyDay(true)
+    setLists(updatedLists);
   };
 
   function selectTodo(todoID) {
@@ -117,44 +122,71 @@ function App() {
     setTodos(filteredTodos);
   };
 
+  const selectList = (listName) => {
+    setSelectedList(listName);
+    setMyDay(false);
+  };
+
   return (
     <div className="main">
       <div className="sidebar">
-        <div>
-          {lists.map((list) => (
-            <p className="sidebar-list" key={uuidv4()}>
-              <span onClick={() => setSelectedList(list)}>{list}</span>
-              <button onClick={() => removeList(list)}>
-                <FeatherIcon className="feather-Icon" icon="close" size="11" />
-              </button>
-            </p>
-          ))}
+        <div className="options-container">
+          <button className="my-day-sidebar" onClick={() => setMyDay(true)}>
+            
+            My Day
+          </button>
+          <button className="my-day-sidebar">Important</button>
         </div>
-        <button onClick={() => setIsMakingList(true)}> + New List </button>
+        <div className="lists-container">
+          <div>
+            {lists.map((list) => (
+              <div
+                className="sidebar-list"
+                key={uuidv4()}
+                onClick={() => selectList(list)}
+              >
+                <span>{list}</span>
+                <button onClick={e => {
+                  e.stopPropagation(); 
+                  removeList(list)}}>
+                  <Close width={10} height={10} />
+                </button>
+              </div>
+            ))}
+          </div>
+          <button onClick={() => setIsMakingList(true)}> + New List </button>
+        </div>
       </div>
       <div className="todo">
-        <p className="selected-list"> {selectedList} </p>
-        <button className="add-todo" onClick={handleAddTodo}>+</button>
-        <input
-          className="add-task-input"
-          ref={todoNameRef}
-          type="text"
-          placeholder="Add a task"
-          onKeyDown={(e) => e.key === "Enter" && handleAddTodo()}
-          autoFocus
-        />
-        <br/>
-        <button className="clear-todos" onClick={handleClearTodos}>Clear Completed Todos</button>
+        <p className="selected-list"> {myDay ? "My Day" : selectedList} </p>
+        <div className="add-todo">
+          <button className="add-todo-button" onClick={handleAddTodo}>
+            <Add width={20} height={20} />
+          </button>
+          <input
+            className="add-task-input"
+            ref={todoNameRef}
+            type="text"
+            placeholder="Add a task"
+            onKeyDown={(e) => e.key === "Enter" && handleAddTodo()}
+            autoFocus
+          />
+        </div>
+        <br />
+        <button className="clear-todos" onClick={handleClearTodos}>
+          Clear Completed Todos
+        </button>
         <div className="left-todo">
           {todos.filter((todo) => !todo.complete).length} left to do
         </div>
-        <hr/>
+        {/* <hr /> */}
         {/* <p> {selectedList} </p> */}
         <TodoList
           todoList={todos}
           toggleTodo={toggleTodo}
           openEditBar={selectTodo}
           selectedList={selectedList}
+          myDay={myDay}
         />
       </div>
 
