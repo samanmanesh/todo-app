@@ -1,5 +1,4 @@
 import React from "react";
-import EditNav from "./EditNav";
 import Todo from "./Todo";
 
 export default function TodoList({
@@ -8,9 +7,11 @@ export default function TodoList({
   openEditBar,
   selectedList,
   myDay,
+  isImportant,
 }) {
   const filterPredicate = (e) => {
     if (myDay) return e.myday;
+    else if(isImportant) return e.important;
     return e.list === selectedList;
   };
   const filteredTodos = todoList.filter(filterPredicate);

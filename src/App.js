@@ -6,7 +6,8 @@ import Modal from "./Modal";
 import EditNav from "./EditNav";
 import { ReactComponent as Close } from "./feather/x.svg";
 import { ReactComponent as Add } from "./feather/plus.svg";
-
+import { ReactComponent as MyDay } from "./feather/sun.svg";
+import { ReactComponent as Important } from "./feather/star.svg";
 const TODOS_KEY = "todoApp.todos";
 const LISTS_KEY = "todoApp.lists";
 
@@ -15,6 +16,7 @@ function App() {
   const [lists, setLists] = useState([]);
   const [selectedList, setSelectedList] = useState("");
   const [myDay, setMyDay] = useState(false);
+  const [important, setImportant] = useState(false);
   const [isMakingList, setIsMakingList] = useState(false);
   const [selectedTodo, setSelectedTodo] = useState(null);
   const todoNameRef = useRef();
@@ -52,6 +54,7 @@ function App() {
           list: selectedList,
           notes: "",
           myday: false,
+          important: false,
         },
       ];
     });
@@ -81,7 +84,7 @@ function App() {
     setLists((prevLists) => [...prevLists, listName]);
     listNameRef.current.value = null;
     setIsMakingList(false);
-    setSelectedList(listName)
+    setSelectedList(listName);
   }
 
   const removeList = (removedList) => {
@@ -100,7 +103,7 @@ function App() {
 
   useEffect(() => {
     if (!todos.some((e) => e.id === selectedTodo)) {
-      console.log("selected is gone!");
+      // console.log("selected is gone!");
       setSelectedTodo(null);
     }
   }, [todos]);
@@ -125,6 +128,14 @@ function App() {
   const selectList = (listName) => {
     setSelectedList(listName);
     setMyDay(false);
+    setImportant(false)
+  };
+
+  const displayTitle = () => {
+    if (myDay) return "My Day";
+    if (important) return "Important";
+    if (selectedList) return selectedList;
+    // {myDay ? "My Day" : selectedList}
   };
 
   return (
@@ -132,10 +143,13 @@ function App() {
       <div className="sidebar">
         <div className="options-container">
           <button className="my-day-sidebar" onClick={() => setMyDay(true)}>
-            
+            <MyDay className="logo" height={13} width={13} />
             My Day
           </button>
-          <button className="my-day-sidebar">Important</button>
+          <button className="my-day-sidebar" onClick={()=> setImportant(true)}>
+            <Important className="logo" height={13} width={13}/>
+            Important
+          </button>
         </div>
         <div className="lists-container">
           <div>
@@ -146,9 +160,12 @@ function App() {
                 onClick={() => selectList(list)}
               >
                 <span>{list}</span>
-                <button onClick={e => {
-                  e.stopPropagation(); 
-                  removeList(list)}}>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    removeList(list);
+                  }}
+                >
                   <Close width={10} height={10} />
                 </button>
               </div>
@@ -158,7 +175,7 @@ function App() {
         </div>
       </div>
       <div className="todo">
-        <p className="selected-list"> {myDay ? "My Day" : selectedList} </p>
+        <p className="selected-list"> {displayTitle()} </p>
         <div className="add-todo">
           <button className="add-todo-button" onClick={handleAddTodo}>
             <Add width={20} height={20} />
@@ -187,6 +204,7 @@ function App() {
           openEditBar={selectTodo}
           selectedList={selectedList}
           myDay={myDay}
+          isImportant={important}
         />
       </div>
 
@@ -217,4 +235,4 @@ function App() {
 
 export default App;
 
-//todo I want first when I click a list it shows the related todos and add to do option It must add every todo and put that name for list
+

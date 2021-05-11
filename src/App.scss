@@ -65,8 +65,11 @@ textarea {
     &:hover {
       filter: drop-shadow(35);
       background-color: rgba(255, 255, 255, 0.159);
+      }
+    
+    .logo{
+      margin-right: .5rem;
     }
-
   }
   
   .lists-container{
