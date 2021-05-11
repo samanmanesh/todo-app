@@ -49,32 +49,31 @@ textarea {
   display: flex;
   flex-direction: column;
 
-  .options-container{
+  .options-container {
     // background-color: rgba(238, 238, 147, 0.131);
     margin-top: 1rem;
     margin-bottom: 3rem;
   }
 
-  .my-day-sidebar{
-
+  .my-day-sidebar {
     background-color: unset;
     border-radius: 0;
-    text-align:start;
+    text-align: start;
     margin-bottom: $gap;
     width: 95%;
     &:hover {
       filter: drop-shadow(35);
       background-color: rgba(255, 255, 255, 0.159);
-      }
-    
-    .logo{
-      margin-right: .5rem;
+    }
+
+    .logo {
+      margin-right: 0.5rem;
     }
   }
-  
-  .lists-container{
+
+  .lists-container {
     // background-color: rgba(150, 194, 62, 0.337);
-    & button{
+    & button {
       margin-top: $gap;
     }
   }
@@ -90,7 +89,7 @@ textarea {
     align-items: center;
     justify-content: space-between;
 
-    & button{
+    & button {
       background-color: unset;
       margin: 0;
       padding: 0;
@@ -156,14 +155,26 @@ textarea {
   &:hover {
     cursor: pointer;
     filter: drop-shadow(30);
-    background-color: rgba(255, 255, 255, 0.07);
+    background-color: rgba(31, 31, 31, 0.549);
   }
 
   &:not(:last-child) {
     border-bottom: $border;
   }
-  & div{
+  & div {
     width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  & button {
+    background-color: unset;
+    .logo {
+      &:hover {
+        filter: drop-shadow(25);
+        background-color: rgba(255, 255, 255, 0.125);
+      }
+    }
   }
 }
 

@@ -8,6 +8,7 @@ export default function TodoList({
   selectedList,
   myDay,
   isImportant,
+  updateTodo,
 }) {
   const filterPredicate = (e) => {
     if (myDay) return e.myday;
@@ -23,6 +24,7 @@ export default function TodoList({
         todoData={todo}
         toggleTodo={toggleTodo}
         openEditBar={openEditBar}
+        updateTodo={updateTodo}
       />
     );
   });

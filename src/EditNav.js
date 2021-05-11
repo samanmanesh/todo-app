@@ -29,7 +29,7 @@ export default function EditNav({ todoData, updateTodo }) {
 
   const handleAddToMyDay = () => {
     const myDay = {...todoData, myday: !todoData.myday}
-    console.log({myDay})
+    // console.log({myDay})
     updateTodo(myDay);
   }
 

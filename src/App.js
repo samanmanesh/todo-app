@@ -128,7 +128,7 @@ function App() {
   const selectList = (listName) => {
     setSelectedList(listName);
     setMyDay(false);
-    setImportant(false)
+    setImportant(false);
   };
 
   const displayTitle = () => {
@@ -137,17 +137,33 @@ function App() {
     if (selectedList) return selectedList;
     // {myDay ? "My Day" : selectedList}
   };
+  const changingMyDayState = (myDay) => {
+      setMyDay(true);
+      setImportant(false);
+  };
 
+  const changingImportantState = (important) => {
+      setImportant(true);
+      setMyDay(false);
+  }
   return (
     <div className="main">
       <div className="sidebar">
         <div className="options-container">
-          <button className="my-day-sidebar" onClick={() => setMyDay(true)}>
+          {/* <button className="my-day-sidebar" onClick={() => setMyDay(true)}> */}
+          <button
+            className="my-day-sidebar"
+            onClick={() => changingMyDayState(myDay)}
+          >
             <MyDay className="logo" height={13} width={13} />
             My Day
           </button>
-          <button className="my-day-sidebar" onClick={()=> setImportant(true)}>
-            <Important className="logo" height={13} width={13}/>
+          {/* <button className="my-day-sidebar" onClick={()=> setImportant(true)}> */}
+          <button
+            className="my-day-sidebar"
+            onClick={() => changingImportantState(important)}
+          >
+            <Important className="logo" height={13} width={13} />
             Important
           </button>
         </div>
@@ -205,6 +221,7 @@ function App() {
           selectedList={selectedList}
           myDay={myDay}
           isImportant={important}
+          updateTodo={updateTodo}
         />
       </div>
 
@@ -234,5 +251,3 @@ function App() {
 }
 
 export default App;
-
-
