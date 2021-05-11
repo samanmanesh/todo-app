@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Reminder from "./Reminder";
-
+import { ReactComponent as MyDay } from "./feather/sun.svg";
+import { ReactComponent as Calendar } from "./feather/calendar.svg";
+import { ReactComponent as ReminderLogo } from "./feather/bell.svg";
 export default function EditNav({ todoData, updateTodo }) {
   const [isClickedReminder, setIsClickedReminder] = useState(false);
 
@@ -47,9 +49,12 @@ export default function EditNav({ todoData, updateTodo }) {
           onChange={handleNameChange}
         ></input>
       </div>
-      <button className="my-day-editbar" onClick={handleAddToMyDay}>Add{todoData.myday && "ed"} to My Day</button>
+      <button className="my-day-editbar" onClick={handleAddToMyDay}>
+        <MyDay className="my-day-editbar-logo" height={14} height={14}/>
+        Add{todoData.myday && "ed"} to My Day</button>
       <div className="reminder">
         <button onClick={handleReminderClick} className="popup-button">
+          <ReminderLogo className="reminder-logo" height={14} height={14} />
           Remind me
           {isClickedReminder && (
             <Reminder>
@@ -62,7 +67,10 @@ export default function EditNav({ todoData, updateTodo }) {
             </Reminder>
           )}
         </button>
-        <button>Add due date</button>
+        <button>
+          <Calendar className="Add-due-date-logo" height={14} height={14}/>
+          Add due date
+        </button>
         <button>Repeat</button>
       </div>
       <textarea

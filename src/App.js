@@ -138,114 +138,158 @@ function App() {
     // {myDay ? "My Day" : selectedList}
   };
   const changingMyDayState = (myDay) => {
-      setMyDay(true);
-      setImportant(false);
+    setMyDay(true);
+    setImportant(false);
   };
 
   const changingImportantState = (important) => {
-      setImportant(true);
-      setMyDay(false);
-  }
-  return (
-    <div className="main">
-      <div className="sidebar">
-        <div className="options-container">
-          {/* <button className="my-day-sidebar" onClick={() => setMyDay(true)}> */}
-          <button
-            className="my-day-sidebar"
-            onClick={() => changingMyDayState(myDay)}
-          >
-            <MyDay className="logo" height={13} width={13} />
-            My Day
-          </button>
-          {/* <button className="my-day-sidebar" onClick={()=> setImportant(true)}> */}
-          <button
-            className="my-day-sidebar"
-            onClick={() => changingImportantState(important)}
-          >
-            <Important className="logo" height={13} width={13} />
-            Important
-          </button>
-        </div>
-        <div className="lists-container">
-          <div>
-            {lists.map((list) => (
-              <div
-                className="sidebar-list"
-                key={uuidv4()}
-                onClick={() => selectList(list)}
-              >
-                <span>{list}</span>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    removeList(list);
-                  }}
-                >
-                  <Close width={10} height={10} />
-                </button>
-              </div>
-            ))}
-          </div>
-          <button onClick={() => setIsMakingList(true)}> + New List </button>
-        </div>
-      </div>
-      <div className="todo">
-        <p className="selected-list"> {displayTitle()} </p>
-        <div className="add-todo">
-          <button className="add-todo-button" onClick={handleAddTodo}>
-            <Add width={20} height={20} />
-          </button>
-          <input
-            className="add-task-input"
-            ref={todoNameRef}
-            type="text"
-            placeholder="Add a task"
-            onKeyDown={(e) => e.key === "Enter" && handleAddTodo()}
-            autoFocus
-          />
-        </div>
-        <br />
-        <button className="clear-todos" onClick={handleClearTodos}>
-          Clear Completed Todos
-        </button>
-        <div className="left-todo">
-          {todos.filter((todo) => !todo.complete).length} left to do
-        </div>
-        {/* <hr /> */}
-        {/* <p> {selectedList} </p> */}
-        <TodoList
-          todoList={todos}
-          toggleTodo={toggleTodo}
-          openEditBar={selectTodo}
-          selectedList={selectedList}
-          myDay={myDay}
-          isImportant={important}
-          updateTodo={updateTodo}
-        />
-      </div>
+    setImportant(true);
+    setMyDay(false);
+  };
 
-      {isMakingList && (
-        <Modal>
-          <p>New List</p>
-          <input
-            type="text"
-            name="new-list-input"
-            placeholder="List Name"
-            autoFocus
-            ref={listNameRef}
-            onKeyDown={(e) => e.key === "Enter" && makeList()}
-          />
-          <button onClick={makeList}>Make List</button>
-          <button onClick={() => setIsMakingList(false)}>Cancel</button>
-        </Modal>
-      )}
-      {selectedTodo && (
-        <EditNav
-          todoData={todos.find((e) => e.id === selectedTodo)}
-          updateTodo={updateTodo}
+  const displayTime = () => {
+    const showDate = new Date();
+    const days = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "Jun",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    const day = days[showDate.getDay()];
+    const month = months[showDate.getMonth()];
+    const date = showDate.getDate();
+    const displayTodaysDate = day + ", " + month + " " + date;
+    return displayTodaysDate;
+  };
+
+  return (
+    <div className="foundation">
+      <div className="topbar">
+        <img
+          src="https://source.unsplash.com/random/1535x110"
+          alt="this is a picture"
         />
-      )}
+      </div>
+      <div className="main">
+        <div className="sidebar">
+          <div className="options-container">
+            {/* <button className="my-day-sidebar" onClick={() => setMyDay(true)}> */}
+            <button
+              className="my-day-sidebar"
+              onClick={() => changingMyDayState(myDay)}
+            >
+              <MyDay className="logo" height={13} width={13} />
+              My Day
+            </button>
+            {/* <button className="my-day-sidebar" onClick={()=> setImportant(true)}> */}
+            <button
+              className="my-day-sidebar"
+              onClick={() => changingImportantState(important)}
+            >
+              <Important className="logo" height={13} width={13} />
+              Important
+            </button>
+          </div>
+          <div className="lists-container">
+            <div>
+              {lists.map((list) => (
+                <div
+                  className="sidebar-list"
+                  key={uuidv4()}
+                  onClick={() => selectList(list)}
+                >
+                  <span>{list}</span>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      removeList(list);
+                    }}
+                  >
+                    <Close width={10} height={10} />
+                  </button>
+                </div>
+              ))}
+            </div>
+            <button onClick={() => setIsMakingList(true)}> + New List </button>
+          </div>
+        </div>
+        <div className="todo">
+          <p className="selected-list"> {displayTitle()} </p>
+          {myDay && <div className="date"> {displayTime()} </div>}
+          <div className="add-todo">
+            <button className="add-todo-button" onClick={handleAddTodo}>
+              <Add width={28} height={28} />
+            </button>
+            <input
+              className="add-task-input"
+              ref={todoNameRef}
+              type="text"
+              placeholder="Add a task"
+              onKeyDown={(e) => e.key === "Enter" && handleAddTodo()}
+              autoFocus
+            />
+          </div>
+          <br />
+         
+          <div className="left-todo">
+            {todos.filter((todo) => !todo.complete).length} left to do
+          </div>
+          <button className="clear-todos" onClick={handleClearTodos}>
+            Clear Completed Todos{" "}
+          </button>
+          
+          {/* <hr /> */}
+          {/* <p> {selectedList} </p> */}
+          <TodoList
+            todoList={todos}
+            toggleTodo={toggleTodo}
+            openEditBar={selectTodo}
+            selectedList={selectedList}
+            myDay={myDay}
+            isImportant={important}
+            updateTodo={updateTodo}
+          />
+        </div>
+
+        {isMakingList && (
+          <Modal>
+            <p>New List</p>
+            <input
+              type="text"
+              name="new-list-input"
+              placeholder="List Name"
+              autoFocus
+              ref={listNameRef}
+              onKeyDown={(e) => e.key === "Enter" && makeList()}
+            />
+            <button onClick={makeList}>Make List</button>
+            <button onClick={() => setIsMakingList(false)}>Cancel</button>
+          </Modal>
+        )}
+        {selectedTodo && (
+          <EditNav
+            todoData={todos.find((e) => e.id === selectedTodo)}
+            updateTodo={updateTodo}
+          />
+        )}
+      </div>
     </div>
   );
 }
