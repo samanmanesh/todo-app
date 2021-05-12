@@ -196,7 +196,17 @@ function App() {
       const leftTodo = todos.filter((todo) => todo.list === selectedList)
         .length;
       return leftTodo;
-    } else {
+    } 
+    if(myDay){
+      const myDayLeftTodo = todos.filter((todo) => todo.myday === myDay).length;
+      return myDayLeftTodo;
+    }
+    if(important) {
+      const importantLeftTodo = todos.filter((todo) => todo.important === important).length;
+      return importantLeftTodo;
+      
+    }
+    else {
       return todos.filter((todo) => !todo.complete).length;
     }
   };

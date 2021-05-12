@@ -266,9 +266,12 @@ textarea {
   }
   & input{
     all: unset;
+    padding: .5rem;
+    width: 90%;
     background-color: #bebfbf;
     border: unset;
     margin-bottom: 1rem;
+    color: rgb(3, 35, 67);
   }
   & button{
     margin-left: 0;
@@ -313,8 +316,9 @@ textarea {
 .my-day-editbar {
   text-align: start;
   margin-left: 0;
+  // width: 93.5%;
 
-  .my-day-editbar-logo {
+ .my-day-editbar-logo {
     margin-right: 0.3rem;
     margin-top: 0.1rem;
   }
