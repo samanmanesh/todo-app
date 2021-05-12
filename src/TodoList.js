@@ -9,11 +9,16 @@ export default function TodoList({
   myDay,
   isImportant,
   updateTodo,
+  total,
 }) {
   const filterPredicate = (e) => {
-    if (myDay) return e.myday;
+    // maybe should go through list and show all of them 
+    // or just check if has total value true just show them
+    if(total) return e;
+    else if(myDay) return e.myday;
     else if(isImportant) return e.important;
-    return e.list === selectedList;
+    else if(selectedList === e.list) return e.list;
+    // return e.list === selectedList;
   };
   const filteredTodos = todoList.filter(filterPredicate);
 

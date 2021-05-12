@@ -9,6 +9,8 @@ export default function Todo({ todoData, toggleTodo, openEditBar,updateTodo }) {
     const newData = {...todoData, important: !todoData.important}
     updateTodo(newData);
   }
+
+  
   return (
     <div className="todo-elements">
       <input

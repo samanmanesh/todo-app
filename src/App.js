@@ -17,6 +17,7 @@ function App() {
   const [selectedList, setSelectedList] = useState("");
   const [myDay, setMyDay] = useState(false);
   const [important, setImportant] = useState(false);
+  const [total, setTotal] = useState(false)
   const [isMakingList, setIsMakingList] = useState(false);
   const [selectedTodo, setSelectedTodo] = useState(null);
   const todoNameRef = useRef();
@@ -55,6 +56,7 @@ function App() {
           notes: "",
           myday: false,
           important: false,
+          total: true,
         },
       ];
     });
@@ -103,7 +105,6 @@ function App() {
 
   useEffect(() => {
     if (!todos.some((e) => e.id === selectedTodo)) {
-      // console.log("selected is gone!");
       setSelectedTodo(null);
     }
   }, [todos]);
@@ -129,23 +130,34 @@ function App() {
     setSelectedList(listName);
     setMyDay(false);
     setImportant(false);
+    setTotal(false);
   };
 
   const displayTitle = () => {
     if (myDay) return "My Day";
     if (important) return "Important";
     if (selectedList) return selectedList;
-    // {myDay ? "My Day" : selectedList}
+    if (total) return "Total";
   };
   const changingMyDayState = (myDay) => {
     setMyDay(true);
     setImportant(false);
+    setTotal(false);
   };
 
   const changingImportantState = (important) => {
     setImportant(true);
     setMyDay(false);
+    setTotal(false);
   };
+
+  const changingTotalState = (total) => {
+    
+    setTotal(true);
+    setImportant(false);
+    setMyDay(false);
+    setSelectedList("");
+  }
 
   const displayTime = () => {
     const showDate = new Date();
@@ -179,6 +191,16 @@ function App() {
     return displayTodaysDate;
   };
 
+  const leftTodos = () => {
+    if (selectedList) {
+      const leftTodo = todos.filter((todo) => todo.list === selectedList)
+        .length;
+      return leftTodo;
+    } else {
+      return todos.filter((todo) => !todo.complete).length;
+    }
+  };
+
   return (
     <div className="foundation">
       <div className="topbar">
@@ -190,7 +212,6 @@ function App() {
       <div className="main">
         <div className="sidebar">
           <div className="options-container">
-            {/* <button className="my-day-sidebar" onClick={() => setMyDay(true)}> */}
             <button
               className="my-day-sidebar"
               onClick={() => changingMyDayState(myDay)}
@@ -198,7 +219,6 @@ function App() {
               <MyDay className="logo" height={13} width={13} />
               My Day
             </button>
-            {/* <button className="my-day-sidebar" onClick={()=> setImportant(true)}> */}
             <button
               className="my-day-sidebar"
               onClick={() => changingImportantState(important)}
@@ -208,6 +228,7 @@ function App() {
             </button>
           </div>
           <div className="lists-container">
+            <div className="total" onClick={() => changingTotalState(total)}>Total</div>
             <div>
               {lists.map((list) => (
                 <div
@@ -227,7 +248,7 @@ function App() {
                 </div>
               ))}
             </div>
-            <button onClick={() => setIsMakingList(true)}> + New List </button>
+            <button className="new-list-button" onClick={() => setIsMakingList(true)}> + New List </button>
           </div>
         </div>
         <div className="todo">
@@ -247,16 +268,13 @@ function App() {
             />
           </div>
           <br />
-         
           <div className="left-todo">
-            {todos.filter((todo) => !todo.complete).length} left to do
+            {leftTodos()} left to do
+            {/* {todos.filter((todo) => !todo.complete).length} left to do */}
           </div>
           <button className="clear-todos" onClick={handleClearTodos}>
             Clear Completed Todos{" "}
           </button>
-          
-          {/* <hr /> */}
-          {/* <p> {selectedList} </p> */}
           <TodoList
             todoList={todos}
             toggleTodo={toggleTodo}
@@ -265,12 +283,13 @@ function App() {
             myDay={myDay}
             isImportant={important}
             updateTodo={updateTodo}
+            total={total}
           />
         </div>
 
         {isMakingList && (
           <Modal>
-            <p>New List</p>
+            <div>New List</div>
             <input
               type="text"
               name="new-list-input"

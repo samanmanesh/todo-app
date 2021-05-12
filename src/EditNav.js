@@ -3,6 +3,8 @@ import Reminder from "./Reminder";
 import { ReactComponent as MyDay } from "./feather/sun.svg";
 import { ReactComponent as Calendar } from "./feather/calendar.svg";
 import { ReactComponent as ReminderLogo } from "./feather/bell.svg";
+import { ReactComponent as Repeat } from "./feather/repeat.svg";
+
 export default function EditNav({ todoData, updateTodo }) {
   const [isClickedReminder, setIsClickedReminder] = useState(false);
 
@@ -24,16 +26,16 @@ export default function EditNav({ todoData, updateTodo }) {
     updateTodo(newTodo);
   };
 
-  const handleNameChange = e => {
+  const handleNameChange = (e) => {
     const newTodo = { ...todoData, name: e.target.value };
     updateTodo(newTodo);
   };
 
   const handleAddToMyDay = () => {
-    const myDay = {...todoData, myday: !todoData.myday}
+    const myDay = { ...todoData, myday: !todoData.myday };
     // console.log({myDay})
     updateTodo(myDay);
-  }
+  };
 
   return (
     <div className="edit-nav">
@@ -50,8 +52,9 @@ export default function EditNav({ todoData, updateTodo }) {
         ></input>
       </div>
       <button className="my-day-editbar" onClick={handleAddToMyDay}>
-        <MyDay className="my-day-editbar-logo" height={14} height={14}/>
-        Add{todoData.myday && "ed"} to My Day</button>
+        <MyDay className="my-day-editbar-logo" height={14} height={14} />
+        Add{todoData.myday && "ed"} to My Day
+      </button>
       <div className="reminder">
         <button onClick={handleReminderClick} className="popup-button">
           <ReminderLogo className="reminder-logo" height={14} height={14} />
@@ -59,7 +62,7 @@ export default function EditNav({ todoData, updateTodo }) {
           {isClickedReminder && (
             <Reminder>
               <p>Reminder</p>
-              <hr/>
+              <hr />
               <button>Later today 10:00 PM</button>
               <button>Tomorrow Tue, 9 Am</button>
               <button>Next week Mon, 9 Am</button>
@@ -68,12 +71,16 @@ export default function EditNav({ todoData, updateTodo }) {
           )}
         </button>
         <button>
-          <Calendar className="Add-due-date-logo" height={14} height={14}/>
+          <Calendar className="Add-due-date-logo" height={14} height={14} />
           Add due date
         </button>
-        <button>Repeat</button>
+        <button>
+          <Repeat className="repeat-logo" height={14} width={14} />
+          Repeat
+        </button>
       </div>
       <textarea
+        className="text-area"
         name="notepad"
         cols="15"
         rows="10"
