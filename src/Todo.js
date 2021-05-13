@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import React from "react";
 import { ReactComponent as Important } from "./feather/star.svg";
 export default function Todo({ todoData, toggleTodo, openEditBar,updateTodo }) {
@@ -10,6 +11,12 @@ export default function Todo({ todoData, toggleTodo, openEditBar,updateTodo }) {
     updateTodo(newData);
   }
 
+  const displayReminder = () => {
+    
+    // dayjs().format('{YYYY} MM-DDTHH:mm:ss SSS [Z] A');
+
+    // return todoData.reminder.dayjs();
+  }
   
   return (
     <div className="todo-elements">
@@ -20,9 +27,9 @@ export default function Todo({ todoData, toggleTodo, openEditBar,updateTodo }) {
       />
       <div onClick={() => openEditBar(todoData.id)}>
         <span>{todoData.name}</span>
-        <button onClick={handleImportant}><Important className="logo" width={14} height={14}/></button>
-        
+        <span>{displayReminder()}</span>
       </div>
+      <button onClick={handleImportant}><Important className="logo" width={14} height={14}/></button>
     </div>
   );
 }

@@ -1,3 +1,5 @@
+@import "~react-datepicker/dist/react-datepicker.css";
+
 $background: rgb(58, 58, 58);
 $darkerBackground: rgb(31, 31, 31);
 $gap: 0.5rem;
@@ -292,14 +294,27 @@ textarea {
   padding: 1rem;
 }
 .edit-todo {
+  min-height: 5rem;
   display: flex;
   flex-direction: row;
-  margin-left: 0;
-  word-wrap: break-word;
-  word-break: break-all;
-  & .edit-name {
-    all: unset;
+  
+  // word-wrap: break-word;
+  // word-break: break-all;
+  .checkbox{
+    margin-left: .3rem;
+    margin-top: .6rem;
   }
+
+  .edit-name {
+    all: unset;
+    margin-left: .5rem;
+    height: 2rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-all;
+    width: 70%;
+  }
+
   &:hover {
     box-shadow: 0.09rem 0.09rem 3rem #bebfbf, -0.09rem -0.09rem 1rem #ffffff;
     transition-duration: 800ms;
@@ -342,10 +357,10 @@ textarea {
     margin-bottom: 0.5rem;
     width: 100%;
     text-align: start;
-    &:hover {
-      filter: drop-shadow(35);
-      background-color: rgba(255, 255, 255, 0.152);
-    }
+    // &:hover {
+    //   filter: drop-shadow(35);
+    //   background-color: rgba(255, 255, 255, 0.152);
+    // }
   }
   .reminder-logo {
     margin-right: 0.3rem;
@@ -376,9 +391,13 @@ textarea {
   }
   @extend .bordered;
   position: absolute;
-  left: 22%;
-  top: 25px;
-  width: 60%;
+  // left: 22%;
+  // top: 25px;
+  // width: 60%;
+  left: 84%;
+  top: 300px;
+  width: 12%;
+
   background-color: rgb(25, 25, 25);
   padding-bottom: 0.5rem;
   & > * {
@@ -402,6 +421,9 @@ textarea {
   }
 }
 
+.react-datepicker__month-container {
+  // background: red;
+}
 // $checkboxSize: 20px;
 // input[type="checkbox"] {
 //   all: unset;

@@ -4,6 +4,7 @@ import TodoList from "./TodoList";
 import { v4 as uuidv4 } from "uuid";
 import Modal from "./Modal";
 import EditNav from "./EditNav";
+import DatePicker from "react-datepicker";
 import { ReactComponent as Close } from "./feather/x.svg";
 import { ReactComponent as Add } from "./feather/plus.svg";
 import { ReactComponent as MyDay } from "./feather/sun.svg";
@@ -17,9 +18,10 @@ function App() {
   const [selectedList, setSelectedList] = useState("");
   const [myDay, setMyDay] = useState(false);
   const [important, setImportant] = useState(false);
-  const [total, setTotal] = useState(false)
+  const [total, setTotal] = useState(false);
   const [isMakingList, setIsMakingList] = useState(false);
   const [selectedTodo, setSelectedTodo] = useState(null);
+  const [startDate, setStartDate] = useState(new Date());
   const todoNameRef = useRef();
   const listNameRef = useRef();
 
@@ -57,6 +59,8 @@ function App() {
           myday: false,
           important: false,
           total: true,
+          reminder:"",
+          due:"",
         },
       ];
     });
@@ -152,12 +156,11 @@ function App() {
   };
 
   const changingTotalState = (total) => {
-    
     setTotal(true);
     setImportant(false);
     setMyDay(false);
     setSelectedList("");
-  }
+  };
 
   const displayTime = () => {
     const showDate = new Date();
@@ -196,21 +199,26 @@ function App() {
       const leftTodo = todos.filter((todo) => todo.list === selectedList)
         .length;
       return leftTodo;
-    } 
-    if(myDay){
+    }
+    if (myDay) {
       const myDayLeftTodo = todos.filter((todo) => todo.myday === myDay).length;
       return myDayLeftTodo;
     }
-    if(important) {
-      const importantLeftTodo = todos.filter((todo) => todo.important === important).length;
+    if (important) {
+      const importantLeftTodo = todos.filter(
+        (todo) => todo.important === important
+      ).length;
       return importantLeftTodo;
-      
-    }
-    else {
+    } else {
       return todos.filter((todo) => !todo.complete).length;
     }
   };
 
+  // return (
+  //   <div>
+  //     <DatePicker selected={startDate} />
+  //   </div>
+  // );
   return (
     <div className="foundation">
       <div className="topbar">
@@ -238,7 +246,9 @@ function App() {
             </button>
           </div>
           <div className="lists-container">
-            <div className="total" onClick={() => changingTotalState(total)}>Total</div>
+            <div className="total" onClick={() => changingTotalState(total)}>
+              Total
+            </div>
             <div>
               {lists.map((list) => (
                 <div
@@ -258,7 +268,16 @@ function App() {
                 </div>
               ))}
             </div>
-            <button className="new-list-button" onClick={() => setIsMakingList(true)}> + New List </button>
+            <button
+              className="new-list-button"
+              onClick={() => setIsMakingList(true)}
+            >
+              {" "}
+              + New List{" "}
+            </button>
+          </div>
+          <div>
+            {/* <DatePicker selected={startDate}  onChange={date => setStartDate(date)} popperProps={{placement: 'right'}}/> */}
           </div>
         </div>
         <div className="todo">
