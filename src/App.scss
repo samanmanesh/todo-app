@@ -95,8 +95,8 @@ textarea {
     & button {
       // margin-top: $gap;
       margin-top: 1rem;
-      margin-bottom: .5rem;
-      margin-left: .3rem;
+      margin-bottom: 0.5rem;
+      margin-left: 0.3rem;
     }
     &:hover {
       box-shadow: 0.09rem 0.09rem 3rem #bebfbf, -0.09rem -0.09rem 1rem #ffffff;
@@ -104,10 +104,10 @@ textarea {
     }
     .total {
       // background: yellowgreen;
-      margin-top: .5rem;
+      margin-top: 0.5rem;
       margin-bottom: 0.5rem;
       margin-left: 0.3rem;
-      margin-right: .2rem;
+      margin-right: 0.2rem;
       padding-bottom: 0.2rem;
       height: 1.8rem;
       font-size: 1.3em;
@@ -133,8 +133,8 @@ textarea {
     word-break: break-all;
     display: flex;
     align-items: center;
-    margin-left: .2rem;
-    margin-right: .2rem;
+    margin-left: 0.2rem;
+    margin-right: 0.2rem;
     justify-content: space-between;
     border-bottom: 0.1rem solid;
     border-left: 0.1rem solid;
@@ -263,19 +263,19 @@ textarea {
   left: 50%;
   margin-top: -7.5rem;
   margin-left: -5rem;
-  & div{
+  & div {
     margin-bottom: 1rem;
   }
-  & input{
+  & input {
     all: unset;
-    padding: .5rem;
+    padding: 0.5rem;
     width: 90%;
     background-color: #bebfbf;
     border: unset;
     margin-bottom: 1rem;
     color: rgb(3, 35, 67);
   }
-  & button{
+  & button {
     margin-left: 0;
   }
   // & input{
@@ -297,17 +297,17 @@ textarea {
   min-height: 5rem;
   display: flex;
   flex-direction: row;
-  
+
   // word-wrap: break-word;
   // word-break: break-all;
-  .checkbox{
-    margin-left: .3rem;
-    margin-top: .6rem;
+  .checkbox {
+    margin-left: 0.3rem;
+    margin-top: 0.6rem;
   }
 
   .edit-name {
     all: unset;
-    margin-left: .5rem;
+    margin-left: 0.5rem;
     height: 2rem;
     word-wrap: break-word;
     overflow-wrap: break-word;
@@ -333,7 +333,7 @@ textarea {
   margin-left: 0;
   // width: 93.5%;
 
- .my-day-editbar-logo {
+  .my-day-editbar-logo {
     margin-right: 0.3rem;
     margin-top: 0.1rem;
   }
@@ -368,10 +368,10 @@ textarea {
   }
 
   .Add-due-date-logo {
-    margin-right: .3rem;
+    margin-right: 0.3rem;
   }
 
-  .repeat-logo{
+  .repeat-logo {
     margin-right: 0.6rem;
     margin-left: 0.3rem;
   }
@@ -394,9 +394,9 @@ textarea {
   // left: 22%;
   // top: 25px;
   // width: 60%;
-  left: 84%;
+  left: 82%;
   top: 300px;
-  width: 12%;
+  width: 15%;
 
   background-color: rgb(25, 25, 25);
   padding-bottom: 0.5rem;
@@ -414,15 +414,62 @@ textarea {
     }
   }
 }
-.text-area{
+.text-area {
   &:hover {
     box-shadow: 0.09rem 0.09rem 3rem #bebfbf, -0.09rem -0.09rem 1rem #ffffff;
     transition-duration: 1100ms;
   }
 }
 
+.date-time-picker {
+  background-color: rgb(118, 116, 116);
+  color: #ffffff;
+  padding-top: .3rem;
+  margin-top: 1rem;
+  margin-left: .5rem;
+  width: 13vw;
+  
+}
+.react-datepicker{
+  background-color: aqua;
+  display: flex;
+  justify-content: space-between;
+  // width: 70rem;
+  left: -21rem;
+  bottom: -3rem;
+  
+}
+
+.react-datepicker__navigation {
+  all: unset;
+  background: blue;
+  line-height: 1.7rem;
+  text-align: center;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  width: 10rem;
+  padding: 0;
+  border: 0.45rem solid transparent;
+  z-index: 1;
+  height: 10px;
+  width: 10px;
+  text-indent: -999em;
+  // overflow: hidden;
+}
+
+.react-datepicker__navigation--previous {
+  left: 10px;
+  border-right-color: #ccc;
+}
+
+
 .react-datepicker__month-container {
   // background: red;
+}
+
+.react-datepicker__time-container{
+  background-color: rebeccapurple;
 }
 // $checkboxSize: 20px;
 // input[type="checkbox"] {

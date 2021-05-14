@@ -1,23 +1,34 @@
 import dayjs from "dayjs";
 import React from "react";
 import { ReactComponent as Important } from "./feather/star.svg";
-export default function Todo({ todoData, toggleTodo, openEditBar,updateTodo }) {
+export default function Todo({
+  todoData,
+  toggleTodo,
+  openEditBar,
+  updateTodo,
+}) {
   function handleTodoClick() {
     toggleTodo(todoData.id);
   }
 
-  const handleImportant= () => {
-    const newData = {...todoData, important: !todoData.important}
+  const handleImportant = () => {
+    const newData = { ...todoData, important: !todoData.important };
     updateTodo(newData);
-  }
+  };
 
-  const displayReminder = () => {
-    
-    // dayjs().format('{YYYY} MM-DDTHH:mm:ss SSS [Z] A');
+  // const displayReminder = () => {
+  //   console.log(todoData);
+  //   const day = dayjs(todoData.reminder);
+  //   console.log(day.diff(dayjs(), "minute"));
 
-    // return todoData.reminder.dayjs();
-  }
-  
+  //   return dayjs(todoData.reminder).format('YYYY-MM-DD');
+
+   
+  //   // return day.isBefore(dayjs())
+  //   //   ? dayjs(todoData.reminder).format("YYYY-MM-DD")
+  //   //   : "";
+  // };
+
   return (
     <div className="todo-elements">
       <input
@@ -27,9 +38,12 @@ export default function Todo({ todoData, toggleTodo, openEditBar,updateTodo }) {
       />
       <div onClick={() => openEditBar(todoData.id)}>
         <span>{todoData.name}</span>
-        <span>{displayReminder()}</span>
+        
+
       </div>
-      <button onClick={handleImportant}><Important className="logo" width={14} height={14}/></button>
+      <button onClick={handleImportant}>
+        <Important className="logo" width={14} height={14} />
+      </button>
     </div>
   );
 }

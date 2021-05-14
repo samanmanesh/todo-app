@@ -4,7 +4,6 @@ import TodoList from "./TodoList";
 import { v4 as uuidv4 } from "uuid";
 import Modal from "./Modal";
 import EditNav from "./EditNav";
-import DatePicker from "react-datepicker";
 import { ReactComponent as Close } from "./feather/x.svg";
 import { ReactComponent as Add } from "./feather/plus.svg";
 import { ReactComponent as MyDay } from "./feather/sun.svg";
