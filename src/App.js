@@ -222,7 +222,7 @@ function App() {
     <div className="foundation">
       <div className="topbar">
         <img
-          src="https://source.unsplash.com/random/1535x110"
+          src="https://source.unsplash.com/random/1917x140"
           alt="this is a picture"
         />
       </div>
@@ -233,14 +233,14 @@ function App() {
               className="my-day-sidebar"
               onClick={() => changingMyDayState(myDay)}
             >
-              <MyDay className="logo" height={13} width={13} />
+              <MyDay className="logo" height={16} width={16} />
               My Day
             </button>
             <button
               className="my-day-sidebar"
               onClick={() => changingImportantState(important)}
             >
-              <Important className="logo" height={13} width={13} />
+              <Important className="logo" height={16} width={16} />
               Important
             </button>
           </div>

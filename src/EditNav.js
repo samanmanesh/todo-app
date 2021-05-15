@@ -49,15 +49,21 @@ export default function EditNav({ todoData, updateTodo }) {
     updateTodo(reminder);
   };
 
-  const displayReminder = () => {
+  const displayReminderTime = () => {
     // const date = dayjs(todoData.reminder).format('YYYY-MM-DD')
     if (todoData.reminder) {
       const title = "Remind me at \n";
-      return title + dayjs(todoData.reminder).format("YYYY-MM-DD");
+      return title + dayjs(todoData.reminder).format("HH:mm");
+      
     } else {
       return "Remind me";
     }
   };
+  const displayReminderDate = () => {
+    if (todoData.reminder) {
+      const title = "Remind me at \n";
+      return dayjs(todoData.reminder).format(" MMM-DD");
+  }}
 
   return (
     <div className="edit-nav">
@@ -84,7 +90,9 @@ export default function EditNav({ todoData, updateTodo }) {
           className="popup-button"
         >
           <ReminderLogo className="reminder-logo" height={14} height={14} />
-          {setIsClickPickDay ? displayReminder() : "Remind me"}
+          {/* {setIsClickPickDay ? displayReminder() : "Remind me"} */}
+          {setIsClickPickDay && displayReminderTime()}
+          <div className="reminder-date">{setIsClickPickDay && displayReminderDate()}</div> 
         </button>
         {isClickedReminder && (
           <Reminder
@@ -104,16 +112,23 @@ export default function EditNav({ todoData, updateTodo }) {
             >
               Pick a date &amp; time
             </button>
+            {isClickPickDay &&
+            <div className="date-time-picker-container">
             <DatePicker
+              // inline
               className="date-time-picker"
               selected={startDate}
-              showTimeSelect
+              // showTimeSelect
+              showTimeInput
               dateFormat="Pp"
               onChange={(date) => {
                 setStartDate(date);
                 handleAddReminder(date);
               }}
             />
+           <button>x</button>
+           </div>
+            }
             {/* <DateRange date={date} onChange={(date) => {setDate(date); handleAddReminder(date)}}/> */}
 
             {/* <DatePicker
@@ -149,13 +164,13 @@ export default function EditNav({ todoData, updateTodo }) {
         onChange={(e) => updateNote(e.target.value)}
       />
 
-      <DatePicker
+      {/* <DatePicker
         selected={startDate}
         onChange={(date) => {
           setStartDate(date);
           handleAddReminder(date);
-        }}
-      />
+        }} */}
+      
       {/* <DateRange date={date} onChange={(date) => setDate(date)}/> */}
       {/* <DateTimePicker
       className = "date-time-picker"

@@ -15,7 +15,7 @@ button {
   padding: 0.4rem;
   // background-color: rgb(22, 100, 182);
   background-color: rgba(13, 56, 100, 0.638);
-  font-size: 0.8rem;
+  font-size: 1.2rem;
   margin-inline: 0.1rem;
   transition: all 0.1s ease;
   // border-radius: 0.4rem;
@@ -50,7 +50,7 @@ textarea {
   width: 100%;
   height: 85vh;
   display: flex;
-  font-size: 0.8rem;
+  font-size: 1.2rem;
   & > * {
     padding: 1rem;
   }
@@ -68,6 +68,7 @@ textarea {
     // background-color: rgba(238, 238, 147, 0.131);
     margin-top: 1rem;
     margin-bottom: 3rem;
+    
     &:hover {
       box-shadow: 0.09rem 0.09rem 3rem #bebfbf, -0.09rem -0.09rem 1rem #ffffff;
       transition-duration: 800ms;
@@ -103,14 +104,15 @@ textarea {
       transition-duration: 800ms;
     }
     .total {
-      // background: yellowgreen;
+      height: 2.4rem;
+      padding: 0.1rem;
       margin-top: 0.5rem;
       margin-bottom: 0.5rem;
       margin-left: 0.3rem;
       margin-right: 0.2rem;
       padding-bottom: 0.2rem;
-      height: 1.8rem;
-      font-size: 1.3em;
+      // height: 1.8rem;
+      font-size: 1.2em;
       font-weight: 4em;
       border-bottom: 0.1rem solid;
       border-right: 0.1rem solid;
@@ -125,9 +127,8 @@ textarea {
   }
 
   .sidebar-list {
-    height: 2rem;
-    // background: rgba(5, 50, 92, 0.316);
-    padding: 0.5rem;
+    height: 3rem;
+    padding: 0.6rem;
     max-width: 100%;
     word-wrap: break-word;
     word-break: break-all;
@@ -163,7 +164,8 @@ textarea {
   flex-grow: 1;
 
   .selected-list {
-    font-size: 1.5rem;
+    
+    font-size: 1.7rem;
     margin-top: 1rem;
     margin-left: 0.5rem;
     margin-bottom: 0.8rem;
@@ -323,7 +325,7 @@ textarea {
 
 .edit-nav > * {
   @extend .bordered;
-  background: $background;
+  background: $darkerBackground;
   margin-bottom: $gap;
   padding: $gap;
 }
@@ -364,9 +366,13 @@ textarea {
   }
   .reminder-logo {
     margin-right: 0.3rem;
-    margin-top: 0.1rem;
+    margin-top: 0.2rem;
+    margin-bottom: 0;
   }
-
+  .reminder-date{
+    margin-left: 1.8rem;
+    margin-top: 0.4rem; 
+  }
   .Add-due-date-logo {
     margin-right: 0.3rem;
   }
@@ -394,11 +400,11 @@ textarea {
   // left: 22%;
   // top: 25px;
   // width: 60%;
-  left: 82%;
-  top: 300px;
+  left: 43%;
+  top: 23rem;
   width: 15%;
 
-  background-color: rgb(25, 25, 25);
+  background-color: $darkerBackground;
   padding-bottom: 0.5rem;
   & > * {
     margin-bottom: 0.5rem;
@@ -421,22 +427,26 @@ textarea {
   }
 }
 
+.date-time-picker-container{
+  display: flex;
+}
+
 .date-time-picker {
   background-color: rgb(118, 116, 116);
   color: #ffffff;
   padding-top: .3rem;
-  margin-top: 1rem;
+  margin-top: .3rem;
   margin-left: .5rem;
-  width: 13vw;
+  width: 8vw;
   
 }
 .react-datepicker{
-  background-color: aqua;
-  display: flex;
+  background-color: rgba(245, 245, 245, 0.946);
+  // display: flex;
   justify-content: space-between;
   // width: 70rem;
-  left: -21rem;
-  bottom: -3rem;
+  left: 1.3rem;
+  bottom: -1.5rem;
   
 }
 
