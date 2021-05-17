@@ -364,17 +364,42 @@ textarea {
       background-color: rgba(255, 255, 255, 0.152);
     }
   }
+
+  .reminder-container{
+    display: flex;
+    justify-content: space-between;
+    width: 103%;
+    padding: .3rem;
+    & > *{
+      background-color: unset;
+      width: 15vw;
+      text-align:start;
+      margin: 0;
+      padding-left: 0;
+    }
+ 
+  }
   .reminder-logo {
     margin-right: 0.3rem;
     margin-top: 0.2rem;
     margin-bottom: 0;
   }
+
+  .reminder-cancel{
+    margin-right: .5rem;
+    width: 5%;
+    margin-top: .8rem;
+    &:hover {
+      color: rgb(120, 184, 209);
+    }
+  }
+
   .reminder-date{
     margin-left: 1.8rem;
     margin-top: 0.4rem; 
   }
   .Add-due-date-logo {
-    margin-right: 0.3rem;
+    margin-right: 0.4rem;
   }
 
   .repeat-logo {

@@ -58,7 +58,7 @@ export default function EditNav({ todoData, updateTodo }) {
     // const date = dayjs(todoData.reminder).format('YYYY-MM-DD')
     if (todoData.reminder) {
       const title = "Remind me at \n";
-      return title + dayjs(todoData.reminder).format("h:mm A");
+      return "Remind me at " + dayjs(todoData.reminder).format(" h:mm A");
     } else {
       return "Remind me";
     }
@@ -70,7 +70,6 @@ export default function EditNav({ todoData, updateTodo }) {
     }
   };
 
-  
   return (
     <div className="edit-nav">
       <div className="edit-todo">
@@ -91,31 +90,50 @@ export default function EditNav({ todoData, updateTodo }) {
         Add{todoData.myday && "ed"} to My Day
       </button>
       <div className="reminder">
+        <div className="reminder-container">
         <button
           onClick={() => setIsClickedReminder(!isClickedReminder)}
           className="popup-button"
         >
           <ReminderLogo className="reminder-logo" height={17} height={17} />
-          {/* {setIsClickPickDay ? displayReminder() : "Remind me"} */}
-          {setIsClickPickDay && displayReminderTime()}
+          {displayReminderTime()}
+          
           <div className="reminder-date">
             {setIsClickPickDay && displayReminderDate()}
           </div>
         </button>
+         {todoData.reminder && (
+            <Close
+              className="reminder-cancel"
+              onClick={() => {handleAddReminder(null); setIsClickedReminder(false)}}
+              width={18}
+              height={18}
+            />
+          )}
+          </div>
         {isClickedReminder && (
           <Reminder onClick={() => setIsClickedReminder(false)}>
             <p>Reminder</p>
             <hr />
-            <button> <Rotate width={16} height={16}/> Later today 10:00 PM</button>
-            <button> <ArrowRight width={16} height={16}/> Tomorrow Tue, 9 Am</button>
-            <button> <Chevrons width={16} height={16}/> Next week Mon, 9 Am</button>
+            <button>
+              {" "}
+              <Rotate width={16} height={16} /> Later today 10:00 PM
+            </button>
+            <button>
+              {" "}
+              <ArrowRight width={16} height={16} /> Tomorrow Tue, 9 Am
+            </button>
+            <button>
+              {" "}
+              <Chevrons width={16} height={16} /> Next week Mon, 9 Am
+            </button>
             <button
               onClick={() => {
                 setIsClickPickDay(true);
                 setIsClickedReminder(true);
               }}
             >
-              <Calendar width={16} height={16}/> Pick a date &amp; time
+              <Calendar width={16} height={16} /> Pick a date &amp; time
             </button>
             {isClickPickDay && (
               <div className="date-time-picker-container">
@@ -135,7 +153,7 @@ export default function EditNav({ todoData, updateTodo }) {
                   className="date-time-picker-close-logo"
                   width={19}
                   height={19}
-                  onClick={()=> setIsClickedReminder(!isClickedReminder)}
+                  onClick={() => setIsClickedReminder(!isClickedReminder)}
                 />
               </div>
             )}
