@@ -8,11 +8,16 @@ import { ReactComponent as MyDay } from "./feather/sun.svg";
 import { ReactComponent as Calendar } from "./feather/calendar.svg";
 import { ReactComponent as ReminderLogo } from "./feather/bell.svg";
 import { ReactComponent as Repeat } from "./feather/repeat.svg";
+import { ReactComponent as Close } from "./feather/x.svg";
+import { ReactComponent as Rotate } from "./feather/rotate-ccw.svg";
+import { ReactComponent as ArrowRight } from "./feather/arrow-right-circle.svg";
+import { ReactComponent as Chevrons } from "./feather/chevrons-right.svg";
 
 export default function EditNav({ todoData, updateTodo }) {
   const [isClickedReminder, setIsClickedReminder] = useState(false);
   const [isClickPickDay, setIsClickPickDay] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
+  const [tomorrow, setTomorrow] = useState(new Date());
 
   if (todoData === undefined) return null;
 
@@ -53,8 +58,7 @@ export default function EditNav({ todoData, updateTodo }) {
     // const date = dayjs(todoData.reminder).format('YYYY-MM-DD')
     if (todoData.reminder) {
       const title = "Remind me at \n";
-      return title + dayjs(todoData.reminder).format("HH:mm");
-      
+      return title + dayjs(todoData.reminder).format("h:mm A");
     } else {
       return "Remind me";
     }
@@ -63,8 +67,10 @@ export default function EditNav({ todoData, updateTodo }) {
     if (todoData.reminder) {
       const title = "Remind me at \n";
       return dayjs(todoData.reminder).format(" MMM-DD");
-  }}
+    }
+  };
 
+  
   return (
     <div className="edit-nav">
       <div className="edit-todo">
@@ -81,7 +87,7 @@ export default function EditNav({ todoData, updateTodo }) {
         ></input>
       </div>
       <button className="my-day-editbar" onClick={handleAddToMyDay}>
-        <MyDay className="my-day-editbar-logo" height={14} height={14} />
+        <MyDay className="my-day-editbar-logo" height={17} height={17} />
         Add{todoData.myday && "ed"} to My Day
       </button>
       <div className="reminder">
@@ -89,46 +95,50 @@ export default function EditNav({ todoData, updateTodo }) {
           onClick={() => setIsClickedReminder(!isClickedReminder)}
           className="popup-button"
         >
-          <ReminderLogo className="reminder-logo" height={14} height={14} />
+          <ReminderLogo className="reminder-logo" height={17} height={17} />
           {/* {setIsClickPickDay ? displayReminder() : "Remind me"} */}
           {setIsClickPickDay && displayReminderTime()}
-          <div className="reminder-date">{setIsClickPickDay && displayReminderDate()}</div> 
+          <div className="reminder-date">
+            {setIsClickPickDay && displayReminderDate()}
+          </div>
         </button>
         {isClickedReminder && (
-          <Reminder
-            className="popup-button"
-            onClick={() => setIsClickedReminder(false)}
-          >
+          <Reminder onClick={() => setIsClickedReminder(false)}>
             <p>Reminder</p>
             <hr />
-            <button>Later today 10:00 PM</button>
-            <button>Tomorrow Tue, 9 Am</button>
-            <button>Next week Mon, 9 Am</button>
+            <button> <Rotate width={16} height={16}/> Later today 10:00 PM</button>
+            <button> <ArrowRight width={16} height={16}/> Tomorrow Tue, 9 Am</button>
+            <button> <Chevrons width={16} height={16}/> Next week Mon, 9 Am</button>
             <button
               onClick={() => {
                 setIsClickPickDay(true);
                 setIsClickedReminder(true);
               }}
             >
-              Pick a date &amp; time
+              <Calendar width={16} height={16}/> Pick a date &amp; time
             </button>
-            {isClickPickDay &&
-            <div className="date-time-picker-container">
-            <DatePicker
-              // inline
-              className="date-time-picker"
-              selected={startDate}
-              // showTimeSelect
-              showTimeInput
-              dateFormat="Pp"
-              onChange={(date) => {
-                setStartDate(date);
-                handleAddReminder(date);
-              }}
-            />
-           <button>x</button>
-           </div>
-            }
+            {isClickPickDay && (
+              <div className="date-time-picker-container">
+                <DatePicker
+                  // inline
+                  className="date-time-picker"
+                  selected={startDate}
+                  // showTimeSelect
+                  showTimeInput
+                  dateFormat="Pp"
+                  onChange={(date) => {
+                    setStartDate(date);
+                    handleAddReminder(date);
+                  }}
+                />
+                <Close
+                  className="date-time-picker-close-logo"
+                  width={19}
+                  height={19}
+                  onClick={()=> setIsClickedReminder(!isClickedReminder)}
+                />
+              </div>
+            )}
             {/* <DateRange date={date} onChange={(date) => {setDate(date); handleAddReminder(date)}}/> */}
 
             {/* <DatePicker
@@ -147,11 +157,11 @@ export default function EditNav({ todoData, updateTodo }) {
         )}
         {/* </button> */}
         <button>
-          <Calendar className="Add-due-date-logo" height={14} height={14} />
+          <Calendar className="Add-due-date-logo" height={17} height={17} />
           Add due date
         </button>
         <button>
-          <Repeat className="repeat-logo" height={14} width={14} />
+          <Repeat className="repeat-logo" height={17} width={17} />
           Repeat
         </button>
       </div>
@@ -170,7 +180,7 @@ export default function EditNav({ todoData, updateTodo }) {
           setStartDate(date);
           handleAddReminder(date);
         }} */}
-      
+
       {/* <DateRange date={date} onChange={(date) => setDate(date)}/> */}
       {/* <DateTimePicker
       className = "date-time-picker"

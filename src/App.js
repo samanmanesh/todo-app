@@ -20,7 +20,6 @@ function App() {
   const [total, setTotal] = useState(false);
   const [isMakingList, setIsMakingList] = useState(false);
   const [selectedTodo, setSelectedTodo] = useState(null);
-  const [startDate, setStartDate] = useState(new Date());
   const todoNameRef = useRef();
   const listNameRef = useRef();
 
@@ -245,7 +244,7 @@ function App() {
             </button>
           </div>
           <div className="lists-container">
-            <div className="total" onClick={() => changingTotalState(total)}>
+            <div className="total" onClick={() => {changingTotalState(total); setSelectedTodo(null)}}>
               Total
             </div>
             <div>
@@ -253,7 +252,7 @@ function App() {
                 <div
                   className="sidebar-list"
                   key={uuidv4()}
-                  onClick={() => selectList(list)}
+                  onClick={() => {selectList(list); setSelectedTodo(null)}}
                 >
                   <span>{list}</span>
                   <button
@@ -262,7 +261,7 @@ function App() {
                       removeList(list);
                     }}
                   >
-                    <Close width={10} height={10} />
+                    <Close width={17} height={17} />
                   </button>
                 </div>
               ))}

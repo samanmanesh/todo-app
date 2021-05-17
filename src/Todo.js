@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import React from "react";
 import { ReactComponent as Important } from "./feather/star.svg";
+import { ReactComponent as ReminderLogo } from "./feather/bell.svg";
 export default function Todo({
   todoData,
   toggleTodo,
@@ -38,7 +39,9 @@ export default function Todo({
       />
       <div onClick={() => openEditBar(todoData.id)}>
         <span>{todoData.name}</span>
-        
+        {todoData.reminder &&
+          <ReminderLogo width={13} height={13}/>
+        }
 
       </div>
       <button onClick={handleImportant}>

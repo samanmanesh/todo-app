@@ -359,10 +359,10 @@ textarea {
     margin-bottom: 0.5rem;
     width: 100%;
     text-align: start;
-    // &:hover {
-    //   filter: drop-shadow(35);
-    //   background-color: rgba(255, 255, 255, 0.152);
-    // }
+    &:hover {
+      filter: drop-shadow(35);
+      background-color: rgba(255, 255, 255, 0.152);
+    }
   }
   .reminder-logo {
     margin-right: 0.3rem;
@@ -387,11 +387,16 @@ textarea {
   position: relative;
 }
 .reminder-popup {
-  & hr {
+  background-color: $darkerBackground;
+  &:hover {
+    background-color: $darkerBackground;
+
+  }
+  hr {
     border-top: 0.5rem;
     color: rgba(255, 255, 255, 0.25);
   }
-  & p {
+  p {
     text-align: center;
     padding-top: 0.5rem;
   }
@@ -404,12 +409,11 @@ textarea {
   top: 23rem;
   width: 15%;
 
-  background-color: $darkerBackground;
   padding-bottom: 0.5rem;
   & > * {
     margin-bottom: 0.5rem;
   }
-  & button {
+  button {
     border-radius: unset;
     background-color: unset;
     width: 90%;
@@ -419,6 +423,7 @@ textarea {
       background-color: rgba(255, 255, 255, 0.152);
     }
   }
+
 }
 .text-area {
   &:hover {
@@ -429,16 +434,27 @@ textarea {
 
 .date-time-picker-container{
   display: flex;
+  justify-content: space-between;
+  .date-time-picker-close-logo{
+    margin-top: .7rem;
+    margin-right: 1.2rem;
+    &:hover {
+      color: rgb(120, 184, 209);
+    }
+  }
 }
 
 .date-time-picker {
-  background-color: rgb(118, 116, 116);
+  // background-color: rgb(118, 116, 116);
+  background-color: $darkerBackground;
+  font-size: 1.2rem;
   color: #ffffff;
   padding-top: .3rem;
   margin-top: .3rem;
   margin-left: .5rem;
-  width: 8vw;
-  
+  width: 11vw;
+  border-radius: 0.5rem;
+  border-color: rgba(47, 89, 131, 0.768);
 }
 .react-datepicker{
   background-color: rgba(245, 245, 245, 0.946);
