@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Reminder from "./Reminder";
 import DatePicker from "react-datepicker";
+import Due from "./Due";
 // import "react-datepicker/dist/react-datepicker.css";
 
 import dayjs from "dayjs";
@@ -13,11 +14,13 @@ import { ReactComponent as Rotate } from "./feather/rotate-ccw.svg";
 import { ReactComponent as ArrowRight } from "./feather/arrow-right-circle.svg";
 import { ReactComponent as Chevrons } from "./feather/chevrons-right.svg";
 
+
 export default function EditNav({ todoData, updateTodo }) {
   const [isClickedReminder, setIsClickedReminder] = useState(false);
   const [isClickPickDay, setIsClickPickDay] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
   const [tomorrow, setTomorrow] = useState(new Date());
+  const [isClickDue, setIsClickDue] = useState(false)
 
   if (todoData === undefined) return null;
 
@@ -90,10 +93,10 @@ export default function EditNav({ todoData, updateTodo }) {
         Add{todoData.myday && "ed"} to My Day
       </button>
       <div className="reminder">
-        <div className="reminder-container">
+        <div className="editbar-container">
         <button
           onClick={() => setIsClickedReminder(!isClickedReminder)}
-          className="popup-button"
+          className="popup-button-remind"
         >
           <ReminderLogo className="reminder-logo" height={17} height={17} />
           {displayReminderTime()}
@@ -104,7 +107,7 @@ export default function EditNav({ todoData, updateTodo }) {
         </button>
          {todoData.reminder && (
             <Close
-              className="reminder-cancel"
+              className="cancel"
               onClick={() => {handleAddReminder(null); setIsClickedReminder(false)}}
               width={18}
               height={18}
@@ -157,27 +160,38 @@ export default function EditNav({ todoData, updateTodo }) {
                 />
               </div>
             )}
-            {/* <DateRange date={date} onChange={(date) => {setDate(date); handleAddReminder(date)}}/> */}
 
-            {/* <DatePicker
-            className="date-time-picker"
-              value={value}
-              label="DatePicker Label"
-              onChange={(value) => setValue}
-            /> */}
-
-            {/* <DatePicker
-                  //   selected={startDate}
-                  //   onChange={(date) => {setStartDate(date); handleAddReminder(date);}}
-                  //   popperProps={{ placement: "right" }}
-                  // /> */}
+ 
           </Reminder>
         )}
-        {/* </button> */}
-        <button>
+        <div className="editbar-container">
+        <button className="popup-button-due" onClick={()=> setIsClickDue(!isClickDue)}>
           <Calendar className="Add-due-date-logo" height={17} height={17} />
           Add due date
         </button>
+        <Close className="cancel"
+              
+              width={18}
+              height={18} />
+        </div>
+        { isClickDue && (
+
+          <Due>
+           <p>Due</p>
+             <hr />
+           <button>
+          <Rotate width={16} height={16} /> Later today 10:00 PM
+           </button>
+           <button>
+          <ArrowRight width={16} height={16} /> Tomorrow Tue, 9 Am
+           </button>
+            <button>
+            <Chevrons width={16} height={16} /> Next week Mon, 9 Am
+           </button>
+           </Due>
+        )}
+        
+
         <button>
           <Repeat className="repeat-logo" height={17} width={17} />
           Repeat

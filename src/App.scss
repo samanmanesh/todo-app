@@ -365,7 +365,7 @@ textarea {
     }
   }
 
-  .reminder-container{
+  .editbar-container{
     display: flex;
     justify-content: space-between;
     width: 103%;
@@ -385,7 +385,7 @@ textarea {
     margin-bottom: 0;
   }
 
-  .reminder-cancel{
+  .cancel{
     margin-right: .5rem;
     width: 5%;
     margin-top: .8rem;
@@ -408,7 +408,7 @@ textarea {
   }
 }
 
-.popup-button {
+.popup-button-remind {
   position: relative;
 }
 .reminder-popup {
@@ -450,6 +450,51 @@ textarea {
   }
 
 }
+
+.popup-button-due {
+  position: relative;
+}
+.due-popup {
+  background-color: $darkerBackground;
+  &:hover {
+    background-color: $darkerBackground;
+
+  }
+  hr {
+    border-top: 0.5rem;
+    color: rgba(255, 255, 255, 0.25);
+  }
+  p {
+    text-align: center;
+    padding-top: 0.5rem;
+  }
+  @extend .bordered;
+  position: absolute;
+  // left: 22%;
+  // top: 25px;
+  // width: 60%;
+  left: 43%;
+  top: 23rem;
+  width: 15%;
+
+  padding-bottom: 0.5rem;
+  & > * {
+    margin-bottom: 0.5rem;
+  }
+  button {
+    border-radius: unset;
+    background-color: unset;
+    width: 90%;
+    text-align: start;
+    &:hover {
+      filter: drop-shadow(35);
+      background-color: rgba(255, 255, 255, 0.152);
+    }
+  }
+
+}
+
+
 .text-area {
   &:hover {
     box-shadow: 0.09rem 0.09rem 3rem #bebfbf, -0.09rem -0.09rem 1rem #ffffff;
