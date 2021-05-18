@@ -239,20 +239,43 @@ textarea {
     border-bottom: $border;
   }
   & div {
-    // width: 12rem;
-    // width: 100%;
+    width: 100%;
     display: flex;
     // justify-content: space-between;
     align-items: center;
     
   }
-  .todo-due{
+
+  .checkbox{
+    margin-right: 1rem;
+  }
+
+  .dot{
+    margin-bottom: 0rem;
+    margin-top: 0;
+    // margin-left: .5rem;
+    // margin-right: 1rem;
     
-    margin-left: 2rem;
+  }
+  .todo-name{
+    // flex: unset;
+    // width: 50vw; 
+  }
+  .option-container{
+    flex: unset;
+    min-width: 6vw;
+  }
+
+  .todo-due{
+   .todo-due-calendar{
+     margin-right: .3rem;
+   }
+   
   }
   .reminder-logo{
-    margin-left: 2rem;
-    margin-right: 2rem;
+    // margin-top: 1.9rem;
+    // margin-left: .5rem;
+    // margin-right: 2rem;
   }
 
   & button {
