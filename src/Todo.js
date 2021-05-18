@@ -2,6 +2,8 @@ import dayjs from "dayjs";
 import React from "react";
 import { ReactComponent as Important } from "./feather/star.svg";
 import { ReactComponent as ReminderLogo } from "./feather/bell.svg";
+import { ReactComponent as Calendar } from "./feather/calendar.svg";
+
 export default function Todo({
   todoData,
   toggleTodo,
@@ -29,7 +31,9 @@ export default function Todo({
   //   //   ? dayjs(todoData.reminder).format("YYYY-MM-DD")
   //   //   : "";
   // };
-
+  const displayDue = () => {
+    if (todoData.due) return dayjs(todoData.due).format(" MMM-DD");
+  }
   return (
     <div className="todo-elements">
       <input
@@ -39,10 +43,16 @@ export default function Todo({
       />
       <div onClick={() => openEditBar(todoData.id)}>
         <span>{todoData.name}</span>
+          {todoData.due && 
+            <div className="todo-due"> <Calendar width={13} height={13}/>
+                {displayDue()}
+            </div>  
+          } 
+          
         {todoData.reminder &&
-          <ReminderLogo width={13} height={13}/>
+          <ReminderLogo className="reminder-logo" width={13} height={13}/>
         }
-
+        
       </div>
       <button onClick={handleImportant}>
         <Important className="logo" width={14} height={14} />

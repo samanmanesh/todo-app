@@ -226,6 +226,7 @@ textarea {
   word-wrap: break-word;
   word-break: break-all;
   align-items: center;
+  
   max-width: 100vw;
   border-radius: 0;
   &:hover {
@@ -238,13 +239,25 @@ textarea {
     border-bottom: $border;
   }
   & div {
-    width: 100%;
+    // width: 12rem;
+    // width: 100%;
     display: flex;
-    justify-content: space-between;
+    // justify-content: space-between;
     align-items: center;
+    
   }
+  .todo-due{
+    
+    margin-left: 2rem;
+  }
+  .reminder-logo{
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+
   & button {
     background-color: unset;
+
     .logo {
       &:hover {
         filter: drop-shadow(25);
