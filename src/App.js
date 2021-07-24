@@ -221,11 +221,10 @@ function App() {
     <div className="foundation">
       <div className="topbar">
         <img
-          src="https://source.unsplash.com/random/1917x140"
+          src="https://source.unsplash.com/random/1870x140"
           alt="this is a picture"
         />
       </div>
-      <div className="main">
         <div className="sidebar">
           <div className="options-container">
             <button
@@ -278,6 +277,7 @@ function App() {
             {/* <DatePicker selected={startDate}  onChange={date => setStartDate(date)} popperProps={{placement: 'right'}}/> */}
           </div>
         </div>
+      <div className="main">
         <div className="todo">
           <p className="selected-list"> {displayTitle()} </p>
           {myDay && <div className="date"> {displayTime()} </div>}

@@ -3,7 +3,7 @@
 $background: rgb(58, 58, 58);
 $darkerBackground: rgb(31, 31, 31);
 $gap: 0.5rem;
-
+$mobileBreakpoints: 370px;
 $border: 1px solid rgba(255, 255, 255, 0.296);
 .bordered {
   border: $border;
@@ -34,21 +34,49 @@ textarea {
 }
 
 .foundation {
-  display: flex;
-  flex-direction: column; 
+  min-width: $mobileBreakpoints;
+  // display: flex;
+  // flex-direction: column;
+  color: azure;
+  display: grid;
+  grid-template-columns: .3fr auto;
+  grid-template-rows: 1fr auto;
+
+  grid-template-areas:
+   "header header"
+   "sidebar sidebar"
+   "main main"
+   ;
+  @media (min-width: 768px) {
+    grid-template-areas: 
+    "header header" 
+    "sidebar main";
+  }
 }
 
 .topbar {
+  grid-area: header;
   @extend .bordered;
-  width: 100%;
-  height: 15vh;
+  width: 100vw;
+  // height: 100vh;
+  // height: 15vh;
+  img{
+    width: 100vw;
+    
+    object-fit: cover;
+  }
 }
 
 .main {
-  color: azure;
+  grid-area: main;
+  // color: azure;
   display: flex;
+  @media (max-width: 768px ){
+    flex-direction: column;
+  }
+
   width: 100%;
-  height: 85vh;
+  // height: 100vh;
   display: flex;
   font-size: 1.2rem;
   & > * {
@@ -57,18 +85,26 @@ textarea {
 }
 
 .sidebar {
+  grid-area: sidebar;
   background-color: $darkerBackground;
   border-right: 1px solid rgba(255, 255, 255, 0.371);
-  max-width: 30vw;
-  min-width: 20vw;
+  // max-width: 30vw;
+  @media (min-width: 768px){
+    min-height:82vh;
+    
+  }
+  // min-width: 20vw;
   display: flex;
   flex-direction: column;
-
+  padding: 1rem;
+  & > * {
+    padding: 1rem;
+  }
   .options-container {
     // background-color: rgba(238, 238, 147, 0.131);
     margin-top: 1rem;
     margin-bottom: 3rem;
-    
+
     &:hover {
       box-shadow: 0.09rem 0.09rem 3rem #bebfbf, -0.09rem -0.09rem 1rem #ffffff;
       transition-duration: 800ms;
@@ -164,7 +200,6 @@ textarea {
   flex-grow: 1;
 
   .selected-list {
-    
     font-size: 1.7rem;
     margin-top: 1rem;
     margin-left: 0.5rem;
@@ -226,7 +261,7 @@ textarea {
   word-wrap: break-word;
   word-break: break-all;
   align-items: center;
-  
+
   max-width: 100vw;
   border-radius: 0;
   &:hover {
@@ -243,36 +278,33 @@ textarea {
     display: flex;
     // justify-content: space-between;
     align-items: center;
-    
   }
 
-  .checkbox{
+  .checkbox {
     margin-right: 1rem;
   }
 
-  .dot{
+  .dot {
     margin-bottom: 0rem;
     margin-top: 0;
     // margin-left: .5rem;
     // margin-right: 1rem;
-    
   }
-  .todo-name{
+  .todo-name {
     // flex: unset;
-    // width: 50vw; 
+    // width: 50vw;
   }
-  .option-container{
+  .option-container {
     flex: unset;
     min-width: 6vw;
   }
 
-  .todo-due{
-   .todo-due-calendar{
-     margin-right: .3rem;
-   }
-   
+  .todo-due {
+    .todo-due-calendar {
+      margin-right: 0.3rem;
+    }
   }
-  .reminder-logo{
+  .reminder-logo {
     // margin-top: 1.9rem;
     // margin-left: .5rem;
     // margin-right: 2rem;
@@ -328,8 +360,11 @@ textarea {
   display: flex;
   flex-direction: column;
   min-width: 20vw;
-  max-width: 25vw;
+  // max-width: 25vw;
   padding: 1rem;
+  @media (max-width: 768px){
+    min-width: 100vw;
+  }
 }
 .edit-todo {
   min-height: 5rem;
@@ -401,19 +436,18 @@ textarea {
     }
   }
 
-  .editbar-container{
+  .editbar-container {
     display: flex;
     justify-content: space-between;
     width: 103%;
-    padding: .3rem;
-    & > *{
+    padding: 0.3rem;
+    & > * {
       background-color: unset;
-      width: 15vw;
-      text-align:start;
+      // width: 15vw;
+      text-align: start;
       margin: 0;
       padding-left: 0;
     }
- 
   }
   .reminder-logo {
     margin-right: 0.3rem;
@@ -421,18 +455,18 @@ textarea {
     margin-bottom: 0;
   }
 
-  .cancel{
-    margin-right: .5rem;
+  .cancel {
+    margin-right: 0.5rem;
     width: 5%;
-    margin-top: .8rem;
+    margin-top: 0.8rem;
     &:hover {
       color: rgb(120, 184, 209);
     }
   }
 
-  .reminder-date{
+  .reminder-date {
     margin-left: 1.8rem;
-    margin-top: 0.4rem; 
+    margin-top: 0.4rem;
   }
   .Add-due-date-logo {
     margin-right: 0.4rem;
@@ -451,7 +485,6 @@ textarea {
   background-color: $darkerBackground;
   &:hover {
     background-color: $darkerBackground;
-
   }
   hr {
     border-top: 0.5rem;
@@ -484,7 +517,6 @@ textarea {
       background-color: rgba(255, 255, 255, 0.152);
     }
   }
-
 }
 
 .popup-button-due {
@@ -494,7 +526,6 @@ textarea {
   background-color: $darkerBackground;
   &:hover {
     background-color: $darkerBackground;
-
   }
   hr {
     border-top: 0.5rem;
@@ -527,9 +558,7 @@ textarea {
       background-color: rgba(255, 255, 255, 0.152);
     }
   }
-
 }
-
 
 .text-area {
   &:hover {
@@ -538,11 +567,11 @@ textarea {
   }
 }
 
-.date-time-picker-container{
+.date-time-picker-container {
   display: flex;
   justify-content: space-between;
-  .date-time-picker-close-logo{
-    margin-top: .7rem;
+  .date-time-picker-close-logo {
+    margin-top: 0.7rem;
     margin-right: 1.2rem;
     &:hover {
       color: rgb(120, 184, 209);
@@ -555,21 +584,20 @@ textarea {
   background-color: $darkerBackground;
   font-size: 1.2rem;
   color: #ffffff;
-  padding-top: .3rem;
-  margin-top: .3rem;
-  margin-left: .5rem;
+  padding-top: 0.3rem;
+  margin-top: 0.3rem;
+  margin-left: 0.5rem;
   width: 11vw;
   border-radius: 0.5rem;
   border-color: rgba(47, 89, 131, 0.768);
 }
-.react-datepicker{
+.react-datepicker {
   background-color: rgba(245, 245, 245, 0.946);
   // display: flex;
   justify-content: space-between;
   // width: 70rem;
   left: 1.3rem;
   bottom: -1.5rem;
-  
 }
 
 .react-datepicker__navigation {
@@ -595,12 +623,11 @@ textarea {
   border-right-color: #ccc;
 }
 
-
 .react-datepicker__month-container {
   // background: red;
 }
 
-.react-datepicker__time-container{
+.react-datepicker__time-container {
   background-color: rebeccapurple;
 }
 // $checkboxSize: 20px;
